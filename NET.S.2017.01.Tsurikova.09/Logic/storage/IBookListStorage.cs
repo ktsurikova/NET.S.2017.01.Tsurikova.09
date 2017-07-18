@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Logic.storage
 {
+    /// <summary>
+    /// interface defining basic operations for working with storage
+    /// </summary>
     public interface IBookListStorage
     {
         List<Book> GetBooks();
