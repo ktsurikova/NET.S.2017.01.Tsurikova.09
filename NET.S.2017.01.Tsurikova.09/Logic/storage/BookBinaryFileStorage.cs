@@ -10,19 +10,20 @@ namespace Logic.storage
     /// <summary>
     /// class for working with binary file storage
     /// </summary>
-    public class BookListBinaryFileStorage : IBookListStorage
+    public class BookBinaryFileStorage : IBookStorage
     {
         /// <summary>
         /// name of file to be worked with
         /// </summary>
-        public string FileName { get; set; }
+        public string FileName { get; }
 
         /// <summary>
         /// initializes new instance of the class using the source data
         /// </summary>
         /// <param name="path">name of file to be worked with</param>
-        public BookListBinaryFileStorage(string path)
+        public BookBinaryFileStorage(string path)
         {
+            if (string.IsNullOrEmpty(path)) throw new ArgumentException($"{nameof(path)} must have valueS");
             FileName = path;
         }
 
@@ -30,11 +31,12 @@ namespace Logic.storage
         /// gets books from file
         /// </summary>
         /// <returns>list of books</returns>
-        public List<Book> GetBooks()
+        public IEnumerable<Book> GetBooks()
         {
             List<Book> books = new List<Book>();
 
-            if (!File.Exists(FileName)) return books;
+            if (!File.Exists(FileName)) throw
+                    new BookStrorageException($"there is no file with such name {FileName}");
 
             using (BinaryReader reader = new BinaryReader(File.Open(FileName, FileMode.Open)))
             {
@@ -56,7 +58,7 @@ namespace Logic.storage
         /// save books in file
         /// </summary>
         /// <param name="books">books to be saved</param>
-        public void SaveBooks(List<Book> books)
+        public void SaveBooks(IEnumerable<Book> books)
         {
             using (BinaryWriter writer = new BinaryWriter(File.Open(FileName, FileMode.Create)))
             {

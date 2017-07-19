@@ -11,7 +11,7 @@ namespace Logic
     /// <summary>
     /// class providing functions for working with books
     /// </summary>
-    public class BookListService : IEnumerable<Book>
+    public class BookListService
     {
         private List<Book> books;
 
@@ -21,6 +21,20 @@ namespace Logic
         public BookListService()
         {
             books = new List<Book>();
+        }
+
+        /// <summary>
+        /// initializes new instance of the class with source data
+        /// </summary>
+        /// <param name="books">books to be added for working with</param>
+        /// <exception cref="ArgumentNullException">throws when books is null</exception>
+        public BookListService(IEnumerable<Book> books)
+        {
+            if (ReferenceEquals(books, null)) throw new ArgumentNullException($"{nameof(books)} is null");
+            foreach (var book in books)
+            {
+                Add(book);
+            }
         }
 
         /// <summary>
@@ -70,21 +84,17 @@ namespace Logic
         }
 
         /// <summary>
-        /// returns an enumerator that enumerates books
-        /// </summary>
-        /// <returns>enumerator that enumerates books</returns>
-        public IEnumerator<Book> GetEnumerator() => books.GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-        /// <summary>
         /// gets books from strorage
         /// </summary>
         /// <param name="storage">instance of storage class</param>
         /// <exception cref="ArgumentNullException">throws when storage is null</exception>
-        public void GetFromStorage(IBookListStorage storage)
+        public void GetFromStorage(IBookStorage storage)
         {
             if (ReferenceEquals(storage, null)) throw new ArgumentNullException($"{nameof(storage)} is null");
-            books = storage.GetBooks();
+            foreach (var book in storage.GetBooks())
+            {
+                Add(book);
+            }
         }
 
         /// <summary>
@@ -92,7 +102,7 @@ namespace Logic
         /// </summary>
         /// <param name="storage">instance of storage class</param>
         /// <exception cref="ArgumentNullException">throws when storage is null</exception>
-        public void SaveToStorage(IBookListStorage storage)
+        public void SaveToStorage(IBookStorage storage)
         {
             if (ReferenceEquals(storage, null)) throw new ArgumentNullException($"{nameof(storage)} is null");
             storage.SaveBooks(books);

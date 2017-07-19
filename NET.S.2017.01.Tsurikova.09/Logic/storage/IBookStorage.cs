@@ -9,9 +9,9 @@ namespace Logic.storage
     /// <summary>
     /// interface defining basic operations for working with storage
     /// </summary>
-    public interface IBookListStorage
+    public interface IBookStorage
     {
-        List<Book> GetBooks();
-        void SaveBooks(List<Book> books);
+        IEnumerable<Book> GetBooks();
+        void SaveBooks(IEnumerable<Book> books);
     }
 }

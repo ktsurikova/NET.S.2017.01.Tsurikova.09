@@ -43,9 +43,9 @@
     <Compile Include="Book.cs" />
     <Compile Include="BookListService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="storage\BookListBinaryFileStorage.cs" />
+    <Compile Include="storage\BookBinaryFileStorage.cs" />
     <Compile Include="storage\BookStrorageException.cs" />
-    <Compile Include="storage\IBookListStorage.cs" />
+    <Compile Include="storage\IBookStorage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

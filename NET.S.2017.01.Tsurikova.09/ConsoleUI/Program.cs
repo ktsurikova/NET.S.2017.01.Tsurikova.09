@@ -36,10 +36,10 @@ namespace ConsoleUI
             //{
             //    Console.WriteLine(VARIABLE);
             //}
-            service.SaveToStorage(new BookListBinaryFileStorage(@"D:\training\NET.S.2017.01.Tsurikova.09\NET.S.2017.01.Tsurikova.09\ConsoleUI\data\data.txt"));
+            service.SaveToStorage(new BookBinaryFileStorage(@"D:\training\NET.S.2017.01.Tsurikova.09\NET.S.2017.01.Tsurikova.09\ConsoleUI\data\data.txt"));
             //service.Remove(book2);
             //service.Remove(book3);
-            service.GetFromStorage(new BookListBinaryFileStorage(@"D:\training\NET.S.2017.01.Tsurikova.09\NET.S.2017.01.Tsurikova.09\ConsoleUI\data\data.txt"));
+            service.GetFromStorage(new BookBinaryFileStorage(@"D:\training\NET.S.2017.01.Tsurikova.09\NET.S.2017.01.Tsurikova.09\ConsoleUI\data\data.txt"));
             Console.WriteLine();
             foreach (var VARIABLE in service)
             {
