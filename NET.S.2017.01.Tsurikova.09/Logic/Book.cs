@@ -9,7 +9,7 @@ namespace Logic
     /// <summary>
     /// class for working with book info
     /// </summary>
-    public class Book : IEquatable<Book>
+    public class Book : IEquatable<Book>, IComparable<Book>, IComparable
     {
         public int Id { get; }
         public string Name { get; }
@@ -23,12 +23,23 @@ namespace Logic
         /// <param name="name">name of book</param>
         /// <param name="author">author of book</param>
         /// <param name="year">year of publication of book</param>
+        /// <exception cref="ArgumentException">thorws when source data is invalid</exception>
         public Book(int id, string name, string author, int year)
         {
+            CheckValidArguments(id, name, author, year);
             Id = id;
             Name = name;
             Author = author;
             YearOfPublication = year;
+        }
+
+        private void CheckValidArguments(int id, string name, string author, int year)
+        {
+            if (!(id > 0)) throw new ArgumentException($"{nameof(id)} can be only positive");
+            if (string.IsNullOrEmpty(name)) throw new ArgumentException($"{nameof(name)} must have value");
+            if (string.IsNullOrEmpty(author)) throw new ArgumentException($"{nameof(author)} must have value");
+            if (!(year >= 1950 || year <= DateTime.Now.Year))
+                throw new ArgumentException($"{nameof(year)} is invalid");
         }
 
         /// <summary>
@@ -71,6 +82,32 @@ namespace Logic
         {
             return Id + 31 * Name.GetHashCode() + 31 * Author.GetHashCode() +
                    31 * YearOfPublication;
+        }
+
+        /// <summary>
+        /// compare books by id
+        /// </summary>
+        /// <param name="other">book to be compared with</param>
+        /// <returns>value indicating whether this book is bigger</returns>
+        /// <exception cref="ArgumentNullException">throws when other is null</exception>
+        public int CompareTo(Book other)
+        {
+            if (ReferenceEquals(other, null)) throw new ArgumentNullException($"{nameof(other)} is null");
+            return Id.CompareTo(other.Id);
+        }
+
+        /// <summary>
+        /// compare books by id
+        /// </summary>
+        /// <param name="obj">object to be compared with</param>
+        /// <returns>value indicating whether this book is bigger</returns>
+        /// <exception cref="ArgumentNullException">throws when obj is null</exception>
+        /// <exception cref="ArgumentException">throws when obj isn't a book</exception>
+        public int CompareTo(object obj)
+        {
+            if (ReferenceEquals(obj, null)) throw new ArgumentNullException($"{nameof(obj)} is null");
+            if (!(obj is Book)) throw new ArgumentException($"{nameof(obj)} must be book");
+            return CompareTo((Book)obj);
         }
     }
 }

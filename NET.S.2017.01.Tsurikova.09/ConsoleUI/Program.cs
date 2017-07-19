@@ -19,7 +19,7 @@ namespace ConsoleUI
             Book book2 = new Book(4, "Fahrenheit 451", "Ray Bradbury", 2000);
             Book book3 = new Book(2, "The Last of the Mohicans", "James Fenimore Cooper", 2012);
             Book book4 = new Book(3, "The Old Man and the Sea", "Ernest Hemingway", 2005);
-            Book book5 = new Book(5, "The Adventures of Tom Sawyer", "Mark Twain", 2015);
+            Book book5 = new Book(5, "The Adventures of Tom Sawyer", "Mark Twain", 2017);
             //Console.WriteLine(book1.Equals(book3));
             //Console.WriteLine(book1.Equals(book2));
 
