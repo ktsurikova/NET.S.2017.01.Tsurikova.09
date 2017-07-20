@@ -56,13 +56,17 @@ namespace ConsoleUI
             }
             catch (ArgumentNullException e)
             {
-                logger.Error(DateTime.Now, e.Message, e.StackTrace);
+                logger.Info(DateTime.Now, e.Message, e.StackTrace);
             }
             catch (ArgumentException e)
             {
-                logger.Error(DateTime.Now, e.Message, e.StackTrace);
+                logger.Info(DateTime.Now, e.Message, e.StackTrace);
             }
             catch (BookStrorageException e)
+            {
+                logger.Info(DateTime.Now, e.Message, e.StackTrace);
+            }
+            catch (Exception e)
             {
                 logger.Error(DateTime.Now, e.Message, e.StackTrace);
             }
