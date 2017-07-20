@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Logic.logging;
 using Logic.storage;
 
 namespace Logic
@@ -70,7 +71,12 @@ namespace Logic
         /// </summary>
         /// <param name="tag">delegate defining the conditions for the search for an element</param>
         /// <returns>the first element satisfying the conditions specified predicate</returns>
-        public Book FindBookByTag(Predicate<Book> tag) => books.Find(tag);
+        /// <exception cref="ArgumentNullException">throws when tag is null</exception>
+        public Book FindBookByTag(Predicate<Book> tag)
+        {
+            if (ReferenceEquals(tag, null)) throw new ArgumentNullException($"{nameof(tag)} is null");
+            return books.Find(tag);
+        }
 
         /// <summary>
         /// sorts books in the list using the specified comparison function.
