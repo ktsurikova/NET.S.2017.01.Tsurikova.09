@@ -30,7 +30,7 @@ namespace ConsoleUI
                 BookListService service = new BookListService();
                 service.Add(book2);
                 service.Add(book1);
-                service.Add(book2);
+                //service.Add(book2);
                 service.Add(book3);
                 //foreach (var VARIABLE in service)
                 //{

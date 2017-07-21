@@ -15,27 +15,42 @@ namespace Logic
     public class BookListService
     {
         private List<Book> books;
+        private ILogger logger;
 
         /// <summary>
         /// initializes new instance of the class
         /// </summary>
-        public BookListService()
+        public BookListService() : this(new NLogger())
         {
+        }
+
+        /// <summary>
+        /// initializes new instance of the class
+        /// </summary>
+        /// <param name="otherLogger">instance of logger</param>
+        public BookListService(ILogger otherLogger)
+        {
+            logger = otherLogger;
             books = new List<Book>();
+            logger.Debug(DateTime.Now, "Ctor", "Service created");
         }
 
         /// <summary>
         /// initializes new instance of the class with source data
         /// </summary>
-        /// <param name="books">books to be added for working with</param>
+        /// <param name="otherBooks">books to be added for working with</param>
+        /// <param name="otherLogger">intance of logger</param>
         /// <exception cref="ArgumentNullException">throws when books is null</exception>
-        public BookListService(IEnumerable<Book> books)
+        public BookListService(IEnumerable<Book> otherBooks, ILogger otherLogger = null)
         {
-            if (ReferenceEquals(books, null)) throw new ArgumentNullException($"{nameof(books)} is null");
-            foreach (var book in books)
+            if (ReferenceEquals(otherBooks, null)) throw new ArgumentNullException($"{nameof(otherBooks)} is null");
+            logger = ReferenceEquals(logger, null) ? new NLogger() : otherLogger;
+            books = new List<Book>();
+            foreach (var book in otherBooks)
             {
                 Add(book);
             }
+            logger.Debug(DateTime.Now, "Ctor", "Service created");
         }
 
         /// <summary>
@@ -50,6 +65,7 @@ namespace Logic
             if (!books.Contains(book))
                 books.Add(book);
             else throw new BookStrorageException("strorage already contains this book");
+            logger.Debug(DateTime.Now, "Add", $"book {book.Id} successfully added");
         }
 
         /// <summary>
@@ -64,6 +80,7 @@ namespace Logic
             if (!books.Contains(book))
                 throw new BookStrorageException("storage doesn't contain such book");
             books.Remove(book);
+            logger.Debug(DateTime.Now, "Remove", $"book {book.Id} successfully removed");
         }
 
         /// <summary>
@@ -101,6 +118,7 @@ namespace Logic
             {
                 Add(book);
             }
+            logger.Debug(DateTime.Now, "Get", $"books were got from storage");
         }
 
         /// <summary>
@@ -112,6 +130,7 @@ namespace Logic
         {
             if (ReferenceEquals(storage, null)) throw new ArgumentNullException($"{nameof(storage)} is null");
             storage.SaveBooks(books);
+            logger.Debug(DateTime.Now, "Save", $"books were saved to storage");
         }
 
     }
