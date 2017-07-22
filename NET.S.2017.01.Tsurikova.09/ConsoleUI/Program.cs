@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 using ConsoleUI.BookComparer;
 using Logic;
 using Logic.logging;
@@ -27,11 +31,49 @@ namespace ConsoleUI
                 //Console.WriteLine(book1.Equals(book3));
                 //Console.WriteLine(book1.Equals(book2));
 
+               // XmlSerializer ser = new XmlSerializer(typeof(List<Book>));
+                //List<Book> books = new List<Book>() {book1, book2, book3, book4, book5};
+                //FileStream writer = new FileStream(@"D:\training\NET.S.2017.01.Tsurikova.09\NET.S.2017.01.Tsurikova.09\ConsoleUI\data\data3.txt", FileMode.Create);
+                //DataContractSerializer ser =
+                //    new DataContractSerializer(typeof(List<Book>));
+                //ser.WriteObject(writer, books);
+                //writer.Close();
+
+                //XmlSerializer x = new XmlSerializer(typeof(List<Book>));
+                //TextWriter writer = new StreamWriter(@"D:\training\NET.S.2017.01.Tsurikova.09\NET.S.2017.01.Tsurikova.09\ConsoleUI\data\data3.txt");
+                //x.Serialize(writer, books);
+
+                //XDocument xmlDocument = new XDocument(
+                //    new XDeclaration("1.0", "utf-8", "yes"),
+
+                //    new XElement("Books",
+
+                //        from book in books
+                //        select new XElement("Book",
+                //            new XElement("Id", book.Id),
+                //            new XElement("Name", book.Name),
+                //            new XElement("Author", book.Author),
+                //            new XElement("YearOfPublication", book.YearOfPublication))
+
+                //    ));
+                //xmlDocument.Save(@"D:\training\NET.S.2017.01.Tsurikova.09\NET.S.2017.01.Tsurikova.09\ConsoleUI\data\data3.txt");
+
+                //IEnumerable<Book> Boo = from BOOKS in
+                //    XDocument.Load(@"D:\training\NET.S.2017.01.Tsurikova.09\NET.S.2017.01.Tsurikova.09\ConsoleUI\data\data3.txt")
+                //        .Descendants("Book")
+                //    select new Book(int.Parse(BOOKS.Element("Id").Value), BOOKS.Element("Name").Value,
+                //    BOOKS.Element("Author").Value, int.Parse(BOOKS.Element("YearOfPublication").Value));
+
+                //foreach (var VARIABLE in Boo)
+                //{
+                //    Console.WriteLine(VARIABLE);
+                //}
+
                 BookListService service = new BookListService();
-                service.Add(book2);
-                service.Add(book1);
                 //service.Add(book2);
-                service.Add(book3);
+                //service.Add(book1);
+                ////service.Add(book2);
+                //service.Add(book3);
                 //foreach (var VARIABLE in service)
                 //{
                 //    Console.WriteLine(VARIABLE);
@@ -43,16 +85,18 @@ namespace ConsoleUI
                 //foreach (var VARIABLE in service)
                 //{
                 //    Console.WriteLine(VARIABLE);
-                //}
-                service.SaveToStorage(
-                    new BookBinaryFileStorage(
-                        @"D:\training\NET.S.2017.01.Tsurikova.09\NET.S.2017.01.Tsurikova.09\ConsoleUI\data\data.txt"));
-                //service.Remove(book2);
+                //}k
+                //service.SaveToStorage(
+                //    new BookSerializationStorage(
+                //        @"D:\training\NET.S.2017.01.Tsurikova.09\NET.S.2017.01.Tsurikova.09\ConsoleUI\data\data2.txt"));
+                ////service.Remove(book2);
                 //service.Remove(book3);
-                //service.GetFromStorage(new BookBinaryFileStorage(@"D:\training\NET.S.2017.01.Tsurikova.09\NET.S.2017.01.Tsurikova.09\ConsoleUI\data\data.txt"));
+                service.GetFromStorage(new BookXmlStorage(@"D:\training\NET.S.2017.01.Tsurikova.09\NET.S.2017.01.Tsurikova.09\ConsoleUI\data\data3.txt"));
                 Console.WriteLine();
-                service.SortBooksByTag(new BookYearComparer());
+                //service.T();
+                service.SortBooksByTag(new BookNameComparer());
                 Console.WriteLine();
+                //service.T();
             }
             catch (ArgumentNullException e)
             {

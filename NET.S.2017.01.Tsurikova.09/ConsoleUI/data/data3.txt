@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Books>
+  <Book>
+    <Id>1</Id>
+    <Name>White Fang</Name>
+    <Author>Jack London</Author>
+    <YearOfPublication>2007</YearOfPublication>
+  </Book>
+  <Book>
+    <Id>4</Id>
+    <Name>Fahrenheit 451</Name>
+    <Author>Ray Bradbury</Author>
+    <YearOfPublication>2000</YearOfPublication>
+  </Book>
+  <Book>
+    <Id>2</Id>
+    <Name>The Last of the Mohicans</Name>
+    <Author>James Fenimore Cooper</Author>
+    <YearOfPublication>2012</YearOfPublication>
+  </Book>
+  <Book>
+    <Id>3</Id>
+    <Name>The Old Man and the Sea</Name>
+    <Author>Ernest Hemingway</Author>
+    <YearOfPublication>2005</YearOfPublication>
+  </Book>
+  <Book>
+    <Id>5</Id>
+    <Name>The Adventures of Tom Sawyer</Name>
+    <Author>Mark Twain</Author>
+    <YearOfPublication>2017</YearOfPublication>
+  </Book>
+</Books>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,12 +10,13 @@ namespace Logic
     /// <summary>
     /// class for working with book info
     /// </summary>
+    [Serializable]
     public class Book : IEquatable<Book>, IComparable<Book>, IComparable
     {
-        public int Id { get; }
-        public string Name { get; }
-        public string Author { get; }
-        public int YearOfPublication { get; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Author { get; set; }
+        public int YearOfPublication { get; set; }
 
         /// <summary>
         /// initializes new instance of the class using the source data
