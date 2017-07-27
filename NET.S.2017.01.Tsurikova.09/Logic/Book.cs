@@ -13,10 +13,10 @@ namespace Logic
     [Serializable]
     public class Book : IEquatable<Book>, IComparable<Book>, IComparable
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Author { get; set; }
-        public int YearOfPublication { get; set; }
+        public int Id { get; }
+        public string Name { get;}
+        public string Author { get; }
+        public int YearOfPublication { get;}
 
         /// <summary>
         /// initializes new instance of the class using the source data

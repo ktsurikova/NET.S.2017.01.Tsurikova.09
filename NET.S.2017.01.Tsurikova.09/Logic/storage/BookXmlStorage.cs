@@ -38,10 +38,9 @@ namespace Logic.storage
                 new BookStrorageException($"there is no file with such name {FileName}");
 
             return from Books in
-                XDocument.Load(FileName)
-                    .Descendants("Book")
-                select new Book(int.Parse(Books.Element("Id").Value), Books.Element("Name").Value,
-                    Books.Element("Author").Value, int.Parse(Books.Element("YearOfPublication").Value));
+                XDocument.Load(FileName).Descendants("Book")
+                   select new Book(int.Parse(Books.Element("Id").Value), Books.Element("Name").Value,
+                       Books.Element("Author").Value, int.Parse(Books.Element("YearOfPublication").Value));
 
         }
 
